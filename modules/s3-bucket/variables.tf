@@ -1,19 +1,14 @@
-variable "media_bucket_name" {
-  type    = string
-  default = "media"
-}
-
-variable "thumbnail_bucket_name" {
-  type    = string
-  default = "thumbnail"
-}
-
-variable "profile_pics_bucket_name" {
-  type    = string
-  default = "profile_pics"
-}
-
 variable "environment" {
   type    = string
-  default = "no_environment"
+  description = "Current environment between Dev/Prod"
+}
+
+variable "politicia_media_cors_allowed_origins" {
+  type    = list(string)
+  description = "S3 CORS configuration for Media Bucket"
+}
+
+variable "politicia_thumbnail_cors_allowed_origins" {
+  type    = list(string)
+  description = "S3 CORS configuration for Thumbnail Bucket"
 }
