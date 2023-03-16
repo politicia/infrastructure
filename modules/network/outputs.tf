@@ -1,7 +1,7 @@
-# output "subnet_1_id" {
-#   value = aws_subnet.subnet_1.id
-# }
+output "vpc_id" {
+  value = aws_vpc.politicia_vpc.id
+}
 
-# output "subnet_2_id" {
-#   value = aws_subnet.subnet_2.id
-# }
+output "subnets_id" {
+  value = ["${aws_subnet.public_subnet.*.id}"]
+}
