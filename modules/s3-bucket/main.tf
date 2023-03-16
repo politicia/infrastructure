@@ -22,6 +22,11 @@ resource "aws_s3_bucket_object" "media_profile_image_dir" {
   key    = "PROFILE_PIC/"
 }
 
+resource "aws_s3_bucket_policy" "media_public_read_policy" {
+  bucket = aws_s3_bucket.politicia_media.id
+  policy = file("${path.module}/policy/${var.environment}-media.json")
+}
+
 resource "aws_s3_bucket_versioning" "politicia_media_versioning" {
   bucket = aws_s3_bucket.politicia_media.id
   versioning_configuration {
@@ -71,4 +76,9 @@ resource "aws_s3_bucket_cors_configuration" "politicia_thumbnail_cors" {
     allowed_methods = ["GET"]
     allowed_origins = ["*"]
   }
+}
+
+resource "aws_s3_bucket_policy" "thumbnail_public_read_policy" {
+  bucket = aws_s3_bucket.politicia_thumbnail.id
+  policy = file("${path.module}/policy/${var.environment}-thumbnail.json")
 }
