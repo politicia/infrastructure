@@ -7,6 +7,21 @@ resource "aws_s3_bucket" "politicia_media" {
   }
 }
 
+resource "aws_s3_bucket_object" "media_image_dir" {
+  bucket = aws_s3_bucket.politicia_media.id
+  key    = "IMAGE/"
+}
+
+resource "aws_s3_bucket_object" "media_video_dir" {
+  bucket = aws_s3_bucket.politicia_media.id
+  key    = "VIDEO/"
+}
+
+resource "aws_s3_bucket_object" "media_profile_image_dir" {
+  bucket = aws_s3_bucket.politicia_media.id
+  key    = "PROFILE_PIC/"
+}
+
 resource "aws_s3_bucket_versioning" "politicia_media_versioning" {
   bucket = aws_s3_bucket.politicia_media.id
   versioning_configuration {
