@@ -15,8 +15,21 @@ module "network" {
 }
 
 module "s3" {
-  source      = "./modules/s3-bucket"
+  source                                    = "./modules/s3-bucket"
+  environment                               = local.environment
+  politicia_media_cors_allowed_origins      = var.politicia_media_cors_allowed_origins
+  politicia_thumbnail_cors_allowed_origins  = var.politicia_thumbnail_cors_allowed_origins
+}
+
+module "cloudfront" {
+  source = "./modules/cloudfront"
   environment = local.environment
-  politicia_media_cors_allowed_origins = var.politicia_media_cors_allowed_origins
-  politicia_thumbnail_cors_allowed_origins = var.politicia_thumbnail_cors_allowed_origins
+  politicia_media_bucket_id = module.s3.politicia_media_bucket_id
+  politicia_media_bucket_domain_name = module.s3.politicia_media_bucket_domain_name
+  politicia_thumbnail_bucket_id = module.s3.politicia_thumbnail_bucket_id
+  politicia_thumbnail_bucket_domain_name = module.s3.politicia_thumbnail_bucket_domain_name
+  public_allowed_http_methods = var.cloudfront_public_allowed_http_methods
+  public_cached_http_methods = var.cloudfront_public_cached_http_methods
+  cloudfront_restriction_type = var.cloudfront_restriction_type
+  cloudfront_restriction_countries = var.cloudfront_restriction_countries
 }

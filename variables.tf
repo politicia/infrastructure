@@ -37,3 +37,23 @@ variable "private_subnets_cidr" {
     type = list(string)
     description = "Subnet Mask of Private Subnets as a List"
 }
+
+variable "cloudfront_public_allowed_http_methods" {
+    type = list(string)
+    description = "HTTP Methods allowed to use on Cloudfront"
+}
+
+variable "cloudfront_public_cached_http_methods" {
+    type = list(string)
+    description = "HTTP Methods to cache on Cloudfront"
+}
+
+variable "cloudfront_restriction_type" {
+    type = string
+    description = "Type of Restriction to act"
+}
+
+variable "cloudfront_restriction_countries" {
+    type = list(string)
+    description = "Blacklist/Whitelist of Countries allowed to access"
+}
